@@ -23,10 +23,10 @@ jobs:
     - name: Copy to remote server
       uses: appleboy/ssh-action@v0.19.0
       with:
-        host: ${{ secrets.203.215.171.93 }}
-        username: ${{ secrets.Administrator }}
-        password: ${{ secrets.Helloitsbspo1! }}
-        port: ${{ secrets.22 }}
+        host: ${{ 203.215.171.93 }}
+        username: ${{ Administrator }}
+        password: ${{ Helloitsbspo1! }}
+        port: ${{ 22 }}
         script: |
           New-Item -ItemType Directory -Force -Path "C:\inetpub\wwwroot\myapp"
           Copy-Item -Path "./publish/*" -Destination "C:\inetpub\wwwroot\myapp" -Recurse
