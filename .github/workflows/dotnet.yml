@@ -21,7 +21,7 @@ jobs:
       run: dotnet publish -c Release --no-self-contained -o ./publish
 
     - name: Copy to remote server
-      uses: appleboy/ssh-action@v2.303.0
+      uses: appleboy/ssh-action@v0.1.7
       with:
         host: 203.215.171.93
         username: Administrator
