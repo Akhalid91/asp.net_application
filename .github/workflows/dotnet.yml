@@ -37,9 +37,10 @@ jobs:
     - name: Print rename folder step
       run: |
           $timestamp = Get-Date -Format "yyyy-MM-dd"
-          Write-Host "Renaming C:\newfolder to C:\newfolder_$timestamp"
-          Rename-Item -Path "C:\newfolder " -NewName "C:\newfolder_$timestamp"
-          New-Item -ItemType Directory -Path "C:\newfolder"
+          New-Item -ItemType Directory -Path "C:\newfolder-$timestamp"
+          Copy-Item -Path "C:\newfolder\*" -Destination "C:\newfolder-$timestampr" -Recurse
+          Remove-Item -Path "C:\newfolder\*" -Recurse 
+
     - name: Copy artifact files to folder
       run: |
           Copy-Item -Path \publish\* -Destination C:\newfolder -Recurse
