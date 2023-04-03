@@ -24,7 +24,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: my-artifact
-          path: /publish
+          path: ./publish
   Deploy:
     runs-on: self-hosted
     needs: Build
