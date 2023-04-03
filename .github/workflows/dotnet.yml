@@ -28,14 +28,11 @@ jobs:
         password: Helloitsbspo1!
         port: 22
         script: |
-        mkdir -p /tmp/publish
-            cd /tmp/publish
-            scp -r ${{ github.workspace }}/publish/* Administrator@203.215.171.93:C:\New folder\test
-          #New-Item -ItemType Directory -Force -Path "C:\inetpub\wwwroot\myapp"
-         # Copy-Item -Path "./publish/*" -Destination "C:\inetpub\wwwroot\myapp" -Recurse
+          New-Item -ItemType Directory -Force -Path "C:\inetpub\wwwroot\myapp"
+          Copy-Item -Path "./publish/*" -Destination "C:\inetpub\wwwroot\myapp" -Recurse
 
-    #- name: Remove publish folder
-     # run: rm -rf ./publish
+    - name: Remove publish folder
+      run: rm -rf ./publish
 
 
 
