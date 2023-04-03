@@ -35,7 +35,7 @@ jobs:
           name: my-artifact
           path: /publish
  
-    - name: Copy artifact files to folder
+    - name: setup python
       uses: actions/setup-python@v2
       with:
           python-version: '3.x' # Use the appropriate Python version for your needs
