@@ -36,7 +36,7 @@ jobs:
           path: /publish
     - name: Print rename folder step
       run: |
-          $timestamp = Get-Date -Format "yyyy-MM-dd"
+          $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm"
           New-Item -ItemType Directory -Path "C:\newfolder-$timestamp"
           Copy-Item -Path "C:\newfolder\*" -Destination "C:\newfolder-$timestampr" -Recurse
           Remove-Item -Path "C:\newfolder\*" -Recurse 
