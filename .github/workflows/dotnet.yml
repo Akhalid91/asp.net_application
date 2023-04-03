@@ -1,4 +1,4 @@
-name: Publish .NET Project to Remote Servr
+name: Dotnet Build and Deploy
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  publish:
+  Build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -25,21 +25,23 @@ jobs:
       with:
           name: my-artifact
           path: /publish
-           
-    - name: Copy to remote server
-      uses: appleboy/ssh-action@v0.1.7
+  Deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v2
       with:
-        host: 203.215.171.93
-        username: Administrator
-        password: Helloitsbspo1!
-        port: 22
-        script: |
-          New-Item -ItemType Directory -Force -Path "C:\inetpub\wwwroot\myapp"
-          Copy-Item -Path "./publish/*" -Destination "C:\inetpub\wwwroot\myapp" -Recurse
+          name: my-artifact
+          path: /publish
+ 
+    - name: Copy artifact files to folder
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.x' # Use the appropriate Python version for your needs
 
-    - name: Remove publish folder
-      run: rm -rf ./publish
-
+    - name: Copy artifact files to folder
+      run: |
+          Copy-Item -Path \publish\* -Destination C:\newfolder -Recurse
 
 
 
