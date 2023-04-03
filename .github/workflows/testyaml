@@ -1,0 +1,30 @@
+name: Deploy to Windows Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build and Publish
+        run: |
+          # Build and publish your application here
+          dotnet publish -c Release -o ./publish
+
+      - name: Transfer Files to Windows Server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: your.windows.server.com
+          username: your-username
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: |
+            mkdir -p /tmp/publish
+            cd /tmp/publish
+            scp -r ${{ github.workspace }}/publish/* 203.215.171.93@administrator:<path-to-destination-folder>
