@@ -1,4 +1,4 @@
-name: Publish .NET Project to Remote Server
+name: Publish .NET Project to Remote Servr
 
 on:
   push:
