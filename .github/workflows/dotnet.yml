@@ -27,6 +27,7 @@ jobs:
           path: /publish
   Deploy:
     runs-on: self-hosted
+    needs: Build
     steps:
     - name: Download Artifact
       uses: actions/download-artifact@v2
