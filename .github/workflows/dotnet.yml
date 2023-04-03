@@ -30,7 +30,7 @@ jobs:
         script: |
         mkdir -p /tmp/publish
             cd /tmp/publish
-            scp -r ${{ github.workspace }}/publish/* Administrator@203.215.171.93:"C:\New folder\test"
+            scp -r ${{ github.workspace }}/publish/* Administrator@203.215.171.93:C:\New folder\test
           #New-Item -ItemType Directory -Force -Path "C:\inetpub\wwwroot\myapp"
          # Copy-Item -Path "./publish/*" -Destination "C:\inetpub\wwwroot\myapp" -Recurse
 
