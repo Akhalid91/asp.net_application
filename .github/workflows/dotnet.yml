@@ -34,15 +34,17 @@ jobs:
       with:
           name: my-artifact
           path: /publish
- 
-#     - name: setup python
-#       uses: actions/setup-python@v2
-#       with:
-#           python-version: '3.x' # Use the appropriate Python version for your needs
-
+    - name: Print rename folder step
+      run: |
+          $timestamp = Get-Date -Format "yyyy-MM-dd"
+          Write-Host "Renaming C:\newfolder to C:\newfolder_$timestamp"
+          New-Item -ItemType Directory -Path "C:\newfolder"
     - name: Copy artifact files to folder
       run: |
           Copy-Item -Path \publish\* -Destination C:\newfolder -Recurse
+    - name: Restart Website IIS
+      run: |
+          Restart-WebItem "IIS:\Sites\webdemo"
 
 
 
