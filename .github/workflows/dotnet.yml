@@ -1,0 +1,81 @@
+name: Dotnet Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.202'
+
+    - name: Publish
+      run: dotnet publish -c Release --no-self-contained -o ./publish
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: my-artifact
+          path: ./publish
+  Deploy:
+    runs-on: self-hosted
+    needs: Build
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v2
+      with:
+          name: my-artifact
+          path: /publish
+    - name: Print rename folder step
+      run: |
+          $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm"
+          New-Item -ItemType Directory -Path "C:\newfolder-$timestamp"
+          Copy-Item -Path "C:\newfolder\*" -Destination "C:\newfolder-$timestampr" -Recurse
+          Remove-Item -Path "C:\newfolder\*" -Recurse 
+
+    - name: Copy artifact files to folder
+      run: |
+          Copy-Item -Path \publish\* -Destination C:\newfolder -Recurse
+   # - name: Restart Website IIS
+   #   run: |
+   #       Restart-WebItem "IIS:\Sites\webdemo"
+
+
+
+
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+#name: .NET
+
+#on:
+#  push:
+#    branches: [ "main" ]
+#  pull_request:
+#    branches: [ "main" ]
+#
+#jobs:
+#  build:
+#
+#    runs-on: self-hosted
+#
+#    steps:
+ #   - uses: actions/checkout@v3
+ #   - name: Setup .NET
+#      uses: actions/setup-dotnet@v3
+ #     with:
+ #       dotnet-version: 7.0.202
+ #   - name: Restore dependencies
+ #     run: dotnet restore
+  #  - name: Build
+  #    run: dotnet build --no-restore
+   # - name: Test
+   #   run: dotnet test --no-build --verbosity normal
