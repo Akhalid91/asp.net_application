@@ -34,9 +34,13 @@ jobs:
       with:
           name: my-artifact
           path: /publish
+  stop-iis-server:
+    runs-on: self-hosted
+    steps:
     - name: Stop IIS Server
       run: |
-       Stop-Service -Name W3SVC -Force
+        Stop-Service -Name W3SVC -Force
+        
     - name: Print rename folder step
       run: |
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm"
