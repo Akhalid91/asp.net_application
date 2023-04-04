@@ -25,6 +25,7 @@ jobs:
       with:
           name: my-artifact
           path: ./publish
+
   Deploy:
     runs-on: self-hosted
     needs: Build
@@ -37,11 +38,13 @@ jobs:
     - name: Stop Website in IIS
       run: |
         Stop-WebItem "IIS:\Sites\webdemo"
+        Start-Sleep -Seconds 10
+        
     - name: Print rename folder step
       run: |
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm"
           New-Item -ItemType Directory -Path "C:\newfolder-$timestamp"
-          Copy-Item -Path "C:\newfolder\*" -Destination "C:\newfolder-$timestampr" -Recurse
+          Copy-Item -Path "C:\newfolder\*" -Destination "C:\newfolder-$timestamp" -Recurse
           Remove-Item -Path "C:\newfolder\*" -Recurse 
 
     - name: Copy artifact files to folder
