@@ -38,7 +38,7 @@ jobs:
     - name: Stop Website in IIS
       run: |
         Stop-WebItem "IIS:\Sites\webdemo"
-        Start-Sleep -Seconds 10
+        Start-Sleep -Seconds 20
         
     - name: Print rename folder step
       run: |
