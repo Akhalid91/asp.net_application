@@ -4,6 +4,19 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+        options:
+        - dev
+        - stage
+        - beta
+        - prod
+env:        
+  MY_VAR: ${{ if github.event.inputs.environment == 'dev' }}dev.example.com${{ elseif github.event.inputs.options == 'stage' }}stage.example.com${{ endif }}
 
 jobs:
   Build:
@@ -11,7 +24,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
+    - name: echo 
+      run : |
+            echo $MY_VAR
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
