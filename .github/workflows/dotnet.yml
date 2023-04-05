@@ -16,7 +16,7 @@ on:
         - beta
         - prod
 env: 
-  ENVIRONMENT: ${{ if github.event.inputs.options == 'dev' }}dev.newfolder{{ elseif github.event.inputs.options == 'stage' }}staging.newfolder{{ elseif github.event.inputs.options == 'beta' }}beta.newfolder{{ else }}prod.newfolder{{ endif }}
+  ENVIRONMENT: ${{ github.event.inputs.environment == 'dev' ? 'dev.newfolder' :github.event.inputs.environment == 'stage' ? 'staging.newfolder' :github.event.inputs.environment == 'beta' ? 'beta.newfolder' :'prod.newfolder' }}
 jobs:
   Build:
     runs-on: ubuntu-latest
