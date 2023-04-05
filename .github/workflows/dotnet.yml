@@ -51,22 +51,22 @@ jobs:
           path: /publish
     - name: Stop Website in IIS
       run: |
-        Stop-WebItem "IIS:\Sites\$env:ENVIROMENT"
+        Stop-WebItem "IIS:\Sites\$env:ENVIRONMENT"
         Start-Sleep -Seconds 20
         
     - name: Print rename folder step
       run: |
           $timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm"
-          New-Item -ItemType Directory -Path "C:\$env:ENVIROMENT-$timestamp"
-          Copy-Item -Path "C:\$env:ENVIROMENT\*" -Destination "C:\$env:ENVIROMENT-$timestamp" -Recurse
-          Remove-Item -Path "C:\$env:ENVIROMENT\*" -Recurse 
+          New-Item -ItemType Directory -Path "C:\$env:ENVIRONMENT-$timestamp"
+          Copy-Item -Path "C:\$env:ENVIRONMENT\*" -Destination "C:\$env:ENVIRONMENT-$timestamp" -Recurse
+          Remove-Item -Path "C:\$env:ENVIRONMENT\*" -Recurse 
 
     - name: Copy artifact files to folder
       run: |
-          Copy-Item -Path \publish\* -Destination C:\$env:ENVIROMENT -Recurse
+          Copy-Item -Path \publish\* -Destination C:\$env:ENVIRONMENT -Recurse
     - name: Restart Website IIS
       run: |
-          Start-WebItem "IIS:\Sites\$env:ENVIROMENT"
+          Start-WebItem "IIS:\Sites\$env:ENVIRONMENT"
 
 
 
