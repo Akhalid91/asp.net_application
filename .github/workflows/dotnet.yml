@@ -16,7 +16,7 @@ on:
         - beta
         - prod
 env:        
-    ENVIRONMENT: ${{ 'if github.event.inputs.options == 'dev' }dev.newfolder${{ elseif github.event.inputs.options == 'stage' }}staging.newfolder${{ elseif github.event.inputs.options == 'beta' }}beta.newfolder${{ elseif github.event.inputs.options == 'prod' }}prod.newfolder${{ else }}${{ github.event.inputs.options }}.newfolder{{ endif }}
+    ENVIRONMENT: ${{ if github.event.inputs.options == 'dev' }}ioc-dev.ironorbit.com${{ elseif github.event.inputs.options == 'stage' }}ioc-staging.ironorbit.com${{ elseif github.event.inputs.options == 'beta' }}iocbeta.ironorbit.com${{ elseif github.event.inputs.options == 'prod' }}ioc.ironorbit.com${{ endif }}
 
 jobs:
   Build:
