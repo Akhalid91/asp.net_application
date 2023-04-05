@@ -17,18 +17,18 @@ on:
         - prod
 env: 
   ENVIRONMENT: ${{ 
-  if github.event.inputs.options == 'dev' 
+    if github.event.inputs.options == 'dev' 
     }}dev.newfolder{{ 
-  elseif github.event.inputs.options == 'stage' 
+    elseif github.event.inputs.options == 'stage' 
     }}staging.newfolder{{ 
-  elseif github.event.inputs.options == 'beta' 
+    elseif github.event.inputs.options == 'beta' 
     }}beta.newfolder{{ 
-  elseif github.event.inputs.options == 'prod' 
+    elseif github.event.inputs.options == 'prod' 
     }}prod.newfolder{{ 
-  else 
+    else 
     }}${{ github.event.inputs.options }}.newfolder{{ 
-  endif 
-}}
+    endif 
+    }}
 jobs:
   Build:
     runs-on: ubuntu-latest
