@@ -1,0 +1,31 @@
+name: Dispatch Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select an environment'
+        required: true
+        default: 'dev'
+        options:
+          dev:
+          staging:
+          beta:
+          prod:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment variable
+        run: |
+          if [ "${{ github.event.inputs.environment }}" == "dev" ]; then
+            env=dev
+          elif [ "${{ github.event.inputs.environment }}" == "staging" ]; then
+            env=staging
+          elif [ "${{ github.event.inputs.environment }}" == "beta" ]; then
+            env=beta
+          else
+            env=prod
+          fi
+          echo "::set-env name=ENVIRONMENT::$env"
