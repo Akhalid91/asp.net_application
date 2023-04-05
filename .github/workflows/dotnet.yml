@@ -16,7 +16,7 @@ on:
         - beta
         - prod
 env:        
-  ENVIRONMENT: ${{ 'if github.event.inputs.options == 'dev' }}dev.newfolder${{ elseif github.event.inputs.options == 'stage' }}staging.newfolder${{ elseif github.event.inputs.options == 'beta' }}beta.newfolder${{ else github.event.inputs.options == 'prod' }}prod.newfolder${{ endif' }}
+  ENVIRONMENT: ${{ if github.event.inputs.options == 'dev' }}dev.newfolder${{ elseif github.event.inputs.options == 'stage' }}staging.newfolder${{ elseif github.event.inputs.options == 'beta' }}beta.newfolder${{ elseif github.event.inputs.options == 'prod' }}prod.newfolder${{ else }}${{ github.event.inputs.options }}.newfolder{{ endif }}
 jobs:
   Build:
     runs-on: ubuntu-latest
